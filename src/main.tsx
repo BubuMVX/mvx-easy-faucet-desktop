@@ -36,7 +36,7 @@ const createWindow = () => {
         const express = require('express')
         const server = express()
         server.use('/', express.static(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}`)));
-        const infos = server.listen(0, 'localhost', () => mainWindow.loadURL(`http://localhost:${infos.address().port}/index.html`));
+        const infos = server.listen(65535, 'localhost', () => mainWindow.loadURL(`http://localhost:${infos.address().port}/index.html`));
         // noinspection JSIgnoredPromiseFromCall
         //mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
     }
