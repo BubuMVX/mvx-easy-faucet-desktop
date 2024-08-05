@@ -64,7 +64,6 @@ export const App = () => {
             expirySeconds: 300,
         })
         const authInit = await client.initialize()
-        //const authSign = authInit.substring(authInit.indexOf('.') + 1, authInit.length)
         const authMessage = new Message({
             data: Buffer.from(`${tempWallet.address.bech32()}${authInit}`),
         })
@@ -85,13 +84,12 @@ export const App = () => {
         )
 
         setMessage('Waiting for funds to be delivered...')
-        let loadingFunds = true
+        let tempWalletOnNetwork
 
         do {
-            const tempWalletOnNetwork = await provider.getAccount(tempWallet.address)
-            loadingFunds = tempWalletOnNetwork.balance.isZero()
+            tempWalletOnNetwork = await provider.getAccount(tempWallet.address)
             await sleep(1000)
-        } while (loadingFunds)
+        } while (tempWalletOnNetwork.balance.isZero())
 
         setMessage('Sending funds to your wallet...')
         const amount = new BigNumber(networkConfig.faucetAmount)
@@ -174,7 +172,7 @@ export const App = () => {
                                 <Form.Control
                                     ref={inputReceiver}
                                     as="textarea"
-                                    style={{ height: '78px' }}
+                                    style={{height: '78px'}}
                                     value={wallet}
                                     maxLength={62}
                                     onChange={(e) => setWallet(e.currentTarget.value.toLowerCase())}
@@ -211,7 +209,7 @@ export const App = () => {
                 Made by&nbsp;
                 <a
                     href="#"
-                    onClick={() => window.electron.openBrowser('https://x.com/grobux')}
+                    onClick={() => window.electron.openBrowser('https://x.com/BubuMVX')}
                 >
                     Bubu
                 </a>
@@ -225,7 +223,7 @@ export const App = () => {
                 &nbsp;|&nbsp;
                 <a
                     href="#"
-                    onClick={() => window.electron.openBrowser('https://github.com/grobux')}
+                    onClick={() => window.electron.openBrowser('https://github.com/BubuMVX')}
                 >
                     GitHub
                 </a>
