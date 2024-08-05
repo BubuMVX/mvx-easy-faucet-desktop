@@ -6,8 +6,6 @@ import {FusesPlugin} from '@electron-forge/plugin-fuses';
 import {VitePlugin} from '@electron-forge/plugin-vite';
 import type {ForgeConfig} from '@electron-forge/shared-types';
 import {FuseV1Options, FuseVersion} from '@electron/fuses';
-import {app} from "electron";
-import path from "path";
 
 const iconBasePath = './icons/icon';
 const config: ForgeConfig = {
@@ -19,6 +17,7 @@ const config: ForgeConfig = {
     makers: [
         new MakerSquirrel({
             setupIcon: `${iconBasePath}.ico`,
+            loadingGif: './src/assets/images/setup.gif',
         }),
         new MakerZIP({}, ['darwin']),
         new MakerRpm({}),
