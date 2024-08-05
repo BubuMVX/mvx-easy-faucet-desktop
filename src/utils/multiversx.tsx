@@ -2,7 +2,7 @@ import {Address, AddressComputer} from "@multiversx/sdk-core/out";
 import {Mnemonic} from "@multiversx/sdk-wallet/out";
 
 export const DECIMALS = 18
-export const walletRegExp = /^erd1[acdefghjklmnpqrstuvwxyz023456789]{58}$/
+export const walletRegExp = /^erd1[ac-hj-np-z02-9]{58}$/
 
 export const isValidWalletAddress = (address: string) => {
     return walletRegExp.test(address)
